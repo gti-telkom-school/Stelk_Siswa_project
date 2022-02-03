@@ -184,7 +184,7 @@ class HomePage extends StatelessWidget {
                           child: Column(
                             children: [
                               Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 15),
+                                padding: const EdgeInsets.symmetric(horizontal: 15,),
                                 child: Container(
                                   width: MediaQuery.of(context).size.width,
                                   height: 100,
@@ -203,7 +203,7 @@ class HomePage extends StatelessWidget {
                                     children: [
                                       Container(
                                         padding: const EdgeInsets.symmetric(
-                                            horizontal: 15, vertical: 10),
+                                            horizontal: 15, vertical: 15),
                                         child: FutureBuilder<List<DatabaseSiswa>>(
                                           future: getDataa(),
                                           builder: (context, snapshot) {
@@ -239,7 +239,7 @@ class HomePage extends StatelessWidget {
                                                       data[0].jurusan.toString(),
                                                       style: Theme.of(context)
                                                           .textTheme
-                                                          .bodyText2,
+                                                          .caption,
                                                     ),
                                                     Text(
                                                       'Tingkat ' +
@@ -248,13 +248,13 @@ class HomePage extends StatelessWidget {
                                                               .toString(),
                                                       style: Theme.of(context)
                                                           .textTheme
-                                                          .bodyText2,
+                                                          .caption,
                                                     ),
                                                     Text(
                                                       data[0].kelas,
                                                       style: Theme.of(context)
                                                           .textTheme
-                                                          .bodyText2,
+                                                          .caption,
                                                     ),
                                                   ]);
                                             }
