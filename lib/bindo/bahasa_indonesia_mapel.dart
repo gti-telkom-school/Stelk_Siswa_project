@@ -23,7 +23,7 @@ class BindoMapelPage extends StatelessWidget {
               children: [
                 InkWell(
                   child: Container(
-                    width: 350,
+                    width: MediaQuery.of(context).size.width,
                     height: 100,
                     decoration: BoxDecoration(
                         color: Colors.grey[200],
@@ -36,12 +36,12 @@ class BindoMapelPage extends StatelessWidget {
                             offset: Offset(0, 3),
                           ),
                         ]),
-                    child: Row(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 15, vertical: 20),
-                          child: Column(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
@@ -61,16 +61,16 @@ class BindoMapelPage extends StatelessWidget {
                               ),
                             ],
                           ),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.only(left: 60),
-                          child: const CircleAvatar(
-                            backgroundImage:
-                                AssetImage('asset/unknownbulat.png'),
-                            radius: 30,
+                          Container(
+                            padding: const EdgeInsets.only(left: 60),
+                            child: const CircleAvatar(
+                              backgroundImage:
+                                  AssetImage('asset/unknownbulat.png'),
+                              radius: 30,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                   onTap: () => Navigator.pushNamed(context, Routes.guru2besse),
@@ -82,6 +82,7 @@ class BindoMapelPage extends StatelessWidget {
                   child: Container(
                       padding: const EdgeInsets.only(left: 7),
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
                             'Bab 1 : Prosedur 1',
@@ -121,6 +122,7 @@ class BindoMapelPage extends StatelessWidget {
                   child: Container(
                       padding: const EdgeInsets.only(left: 7),
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
                             'Bab 2 : Prosedur 2',
@@ -159,6 +161,7 @@ class BindoMapelPage extends StatelessWidget {
                 Container(
                     padding: const EdgeInsets.only(left: 7),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           'Bab 3 : Quiz',

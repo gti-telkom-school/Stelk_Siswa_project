@@ -23,7 +23,7 @@ class BkMapelPage extends StatelessWidget {
               children: [
                 InkWell(
                     child: Container(
-                      width: 350,
+                      width: MediaQuery.of(context).size.width,
                       height: 100,
                       decoration: BoxDecoration(
                           color: Colors.grey[200],
@@ -36,12 +36,12 @@ class BkMapelPage extends StatelessWidget {
                               offset: Offset(0, 3),
                             ),
                           ]),
-                      child: Row(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 15, vertical: 20),
-                            child: Column(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
@@ -61,14 +61,14 @@ class BkMapelPage extends StatelessWidget {
                                 ),
                               ],
                             ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.only(left: 90),
-                            child: Image.asset(
-                              'asset/abualibulat.png',
+                            Container(
+                              padding: const EdgeInsets.only(left: 90),
+                              child: Image.asset(
+                                'asset/abualibulat.png',
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                     onTap: () =>
@@ -80,6 +80,7 @@ class BkMapelPage extends StatelessWidget {
                   child: Container(
                       padding: const EdgeInsets.only(left: 7),
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
                             'Bab 1 : Manajemen Waktu',
@@ -119,6 +120,7 @@ class BkMapelPage extends StatelessWidget {
                   child: Container(
                       padding: const EdgeInsets.only(left: 7),
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
                             'Bab 2 : Kepekaan Diri Dan Sosial',
@@ -157,6 +159,7 @@ class BkMapelPage extends StatelessWidget {
                 Container(
                     padding: const EdgeInsets.only(left: 7),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           'Bab 3 : Quiz',

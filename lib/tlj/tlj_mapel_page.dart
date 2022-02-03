@@ -23,7 +23,7 @@ class TljMapelPage extends StatelessWidget {
               children: [
                 InkWell(
                     child: Container(
-                      width: 350,
+                      width: MediaQuery.of(context).size.width,
                       height: 100,
                       decoration: BoxDecoration(
                           color: Colors.grey[200],
@@ -36,12 +36,12 @@ class TljMapelPage extends StatelessWidget {
                               offset: Offset(0, 3),
                             ),
                           ]),
-                      child: Row(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 15, vertical: 20),
-                            child: Column(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: const [
                                 Text(
@@ -52,15 +52,15 @@ class TljMapelPage extends StatelessWidget {
                                 Text('Tingkat 11'),
                               ],
                             ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.only(left: 45),
-                            child: const CircleAvatar(
-                              backgroundImage: AssetImage('asset/sribulat.png'),
-                              radius: 32,
+                            Container(
+                              padding: const EdgeInsets.only(left: 45),
+                              child: const CircleAvatar(
+                                backgroundImage: AssetImage('asset/sribulat.png'),
+                                radius: 32,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                     onTap: () =>
@@ -72,6 +72,7 @@ class TljMapelPage extends StatelessWidget {
                   child: Container(
                       padding: const EdgeInsets.only(left: 7),
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           const Text('Bab 1 : VolP'),
                           Container(
@@ -108,6 +109,7 @@ class TljMapelPage extends StatelessWidget {
                   child: Container(
                       padding: const EdgeInsets.only(left: 7),
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           const Text('Bab 2 : Keragaman Komunikasi Data'),
                           Container(
@@ -143,6 +145,7 @@ class TljMapelPage extends StatelessWidget {
                 Container(
                     padding: const EdgeInsets.only(left: 7),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const Text('Bab 3 : Quiz'),
                         Container(

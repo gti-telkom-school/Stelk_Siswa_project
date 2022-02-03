@@ -183,95 +183,98 @@ class HomePage extends StatelessWidget {
                         SliverToBoxAdapter(
                           child: Column(
                             children: [
-                              Container(
-                                width: 365,
-                                height: 100,
-                                decoration: BoxDecoration(
-                                    color: Colors.grey[200],
-                                    borderRadius: BorderRadius.circular(10),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey.withOpacity(0.4),
-                                        spreadRadius: 1,
-                                        blurRadius: 5,
-                                        offset: const Offset(0, 3),
-                                      ),
-                                    ]),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 15, vertical: 10),
-                                      child: FutureBuilder<List<DatabaseSiswa>>(
-                                        future: getDataa(),
-                                        builder: (context, snapshot) {
-                                          if (snapshot.hasError) {
-                                            return Text(
-                                                snapshot.error.toString());
-                                          }
-                                          final data = snapshot.data;
-                                          if (data != null &&
-                                              snapshot.hasData) {
-                                            return Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                      'Halo, ' +
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 15),
+                                child: Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  height: 100,
+                                  decoration: BoxDecoration(
+                                      color: Colors.grey[200],
+                                      borderRadius: BorderRadius.circular(10),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey.withOpacity(0.4),
+                                          spreadRadius: 1,
+                                          blurRadius: 5,
+                                          offset: const Offset(0, 3),
+                                        ),
+                                      ]),
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 15, vertical: 10),
+                                        child: FutureBuilder<List<DatabaseSiswa>>(
+                                          future: getDataa(),
+                                          builder: (context, snapshot) {
+                                            if (snapshot.hasError) {
+                                              return Text(
+                                                  snapshot.error.toString());
+                                            }
+                                            final data = snapshot.data;
+                                            if (data != null &&
+                                                snapshot.hasData) {
+                                              return Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                        'Halo, ' +
+                                                            data[0]
+                                                                .nameu
+                                                                .toString(),
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .bodyText1
+                                                            ?.copyWith(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold)
+
+                                                        // TextStyle(
+                                                        //     fontWeight:
+                                                        //         FontWeight.bold),
+                                                        ),
+                                                    Text(
+                                                      data[0].jurusan.toString(),
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .bodyText2,
+                                                    ),
+                                                    Text(
+                                                      'Tingkat ' +
                                                           data[0]
-                                                              .nameu
+                                                              .tingkat
                                                               .toString(),
                                                       style: Theme.of(context)
                                                           .textTheme
-                                                          .bodyText1
-                                                          ?.copyWith(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold)
-
-                                                      // TextStyle(
-                                                      //     fontWeight:
-                                                      //         FontWeight.bold),
-                                                      ),
-                                                  Text(
-                                                    data[0].jurusan.toString(),
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .bodyText2,
-                                                  ),
-                                                  Text(
-                                                    'Tingkat ' +
-                                                        data[0]
-                                                            .tingkat
-                                                            .toString(),
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .bodyText2,
-                                                  ),
-                                                  Text(
-                                                    data[0].kelas,
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .bodyText2,
-                                                  ),
-                                                ]);
-                                          }
-                                          return const Center(
-                                            child: CircularProgressIndicator(),
-                                          );
-                                        },
+                                                          .bodyText2,
+                                                    ),
+                                                    Text(
+                                                      data[0].kelas,
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .bodyText2,
+                                                    ),
+                                                  ]);
+                                            }
+                                            return const Center(
+                                              child: CircularProgressIndicator(),
+                                            );
+                                          },
+                                        ),
                                       ),
-                                    ),
-                                    const Spacer(),
-                                    Container(
-                                      padding: const EdgeInsets.only(right: 20),
-                                      child: const CircleAvatar(
-                                        backgroundImage:
-                                            AssetImage('asset/fotoorang.png'),
-                                        radius: 30,
+                                      const Spacer(),
+                                      Container(
+                                        padding: const EdgeInsets.only(right: 20),
+                                        child: const CircleAvatar(
+                                          backgroundImage:
+                                              AssetImage('asset/fotoorang.png'),
+                                          radius: 30,
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
                             ],

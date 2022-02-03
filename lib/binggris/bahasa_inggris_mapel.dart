@@ -24,7 +24,7 @@ class BinggrisMapelPage extends StatelessWidget {
               children: [
                 InkWell(
                   child: Container(
-                    width: 350,
+                    width: MediaQuery.of(context).size.width,
                     height: 100,
                     decoration: BoxDecoration(
                         color: Colors.grey[200],
@@ -37,12 +37,12 @@ class BinggrisMapelPage extends StatelessWidget {
                             offset: Offset(0, 3),
                           ),
                         ]),
-                    child: Row(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 15, vertical: 20),
-                          child: Column(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
@@ -62,14 +62,14 @@ class BinggrisMapelPage extends StatelessWidget {
                               ),
                             ],
                           ),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.only(left: 130),
-                          child: Image.asset(
-                            'asset/nurhayatibulat.png',
-                          ),
-                        ),
-                      ],
+  
+                            
+                             Image.asset(
+                              'asset/nurhayatibulat.png',
+                            ),
+                          
+                        ],
+                      ),
                     ),
                   ),
                   onTap: () =>
@@ -82,6 +82,7 @@ class BinggrisMapelPage extends StatelessWidget {
                   child: Container(
                       padding: const EdgeInsets.only(left: 7),
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
                             'Bab 1 : First Assingment of Suggest and Offer',
@@ -121,6 +122,7 @@ class BinggrisMapelPage extends StatelessWidget {
                   child: Container(
                       padding: const EdgeInsets.only(left: 7),
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
                             'Bab 2 : 3rd Meeting of SFH',
@@ -155,6 +157,7 @@ class BinggrisMapelPage extends StatelessWidget {
                 Container(
                     padding: const EdgeInsets.only(left: 7),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           'Bab 3 : Quiz',

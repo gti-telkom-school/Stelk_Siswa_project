@@ -23,7 +23,7 @@ class PenjasMapelPage extends StatelessWidget {
               children: [
                 InkWell(
                     child: Container(
-                      width: 350,
+                      width: MediaQuery.of(context).size.width,
                       height: 100,
                       decoration: BoxDecoration(
                           color: Colors.grey[200],
@@ -36,12 +36,12 @@ class PenjasMapelPage extends StatelessWidget {
                               offset: Offset(0, 3),
                             ),
                           ]),
-                      child: Row(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 15, vertical: 20),
-                            child: Column(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
@@ -61,14 +61,14 @@ class PenjasMapelPage extends StatelessWidget {
                                 ),
                               ],
                             ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.only(left: 100),
-                            child: Image.asset(
-                              'asset/suardibulat.png',
+                            Container(
+                              padding: const EdgeInsets.only(left: 100),
+                              child: Image.asset(
+                                'asset/suardibulat.png',
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                     onTap: () =>
@@ -80,6 +80,7 @@ class PenjasMapelPage extends StatelessWidget {
                   child: Container(
                       padding: const EdgeInsets.only(left: 7),
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
                             'Bab 1 : Pencak Silat',
@@ -119,6 +120,7 @@ class PenjasMapelPage extends StatelessWidget {
                   child: Container(
                       padding: const EdgeInsets.only(left: 7),
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
                             'Bab 2 : Permainan Bola Voli',
@@ -157,6 +159,7 @@ class PenjasMapelPage extends StatelessWidget {
                 Container(
                     padding: const EdgeInsets.only(left: 7),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           'Bab 3 : Quiz',
