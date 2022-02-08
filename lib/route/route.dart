@@ -12,18 +12,6 @@ import 'package:tesss/forum/tel_forum_page.dart';
 import 'package:tesss/forum/tja_forum_page.dart';
 import 'package:tesss/forum/tkj_forum_page.dart';
 import 'package:tesss/forum/upw_forum_page.dart';
-import 'package:tesss/guru/guru10_asrul.dart';
-import 'package:tesss/guru/guru11_sriwahyuningsih.dart';
-import 'package:tesss/guru/guru12_raodatul.dart';
-import 'package:tesss/guru/guru13_suharyuni.dart';
-import 'package:tesss/guru/guru2_besse.dart';
-import 'package:tesss/guru/guru3_chaerunnisa.dart';
-import 'package:tesss/guru/guru4_matius.dart';
-import 'package:tesss/guru/guru5_bakri.dart';
-import 'package:tesss/guru/guru6_suradi.dart';
-import 'package:tesss/guru/guru7_nurfadhilah.dart';
-import 'package:tesss/guru/guru8_abuali.dart';
-import 'package:tesss/guru/guru9_ahwan.dart';
 import 'package:tesss/home/guru_page.dart';
 import 'package:tesss/home/kelaskutkj.dart';
 import 'package:tesss/home/kelola.dart';
@@ -241,42 +229,6 @@ class Routes {
       case prestasi:
         return pageRoute(const PrestasiPage());
 
-
-      case guru2besse:
-        return pageRoute(const BesseGuruProfilPage());
-
-      case guru3chaerunnisa:
-        return pageRoute(const ChaerunnisaGuruProfilPage());
-
-      case guru4matius:
-        return pageRoute(const MatiusGuruProfilPage());
-
-      case guru5bakri:
-        return pageRoute(const BakriGuruProfilPage());
-
-      case guru6suardi:
-        return pageRoute(const SuardiGuruProfilPage());
-
-      case guru7nurfadhilah:
-        return pageRoute(const NurfadhilahGuruProfilPage());
-
-      case guru8abuali:
-        return pageRoute(const AbuAliGuruProfilPage());
-
-      case guru9ahwan:
-        return pageRoute(const AhwanGuruProfilPage());
-
-      case guru10asrul:
-        return pageRoute(const AsrulGuruProfilPage());
-
-      case guru11sri:
-        return pageRoute(const SriWahyuningsihGuruProfilPage());
-
-      case guru12raodatul:
-        return pageRoute(const RaodatulGuruProfilPage());
-
-      case guru13suharyuni:
-        return pageRoute(const SuharyuniGuruProfilPage());
 
       case uploadtugas:
         return pageRoute(const TugasBab1Binggris());
