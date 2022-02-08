@@ -12,20 +12,40 @@ class Behavior extends ScrollBehavior {
 class PageDetailForum extends StatelessWidget {
   final String title;
   final String imagebanner;
-  final String fotoprofil;
-  final String namaguru;
+  final String profilguru;
+  final String profil1;
+  final String profil2;
+  final Map<String, String> guru;
   final String nama1;
   final String nama2;
-  final String caption;
-  const PageDetailForum({ Key? key , required this.caption, required this.imagebanner, required this.nama1, required this.nama2, required this.namaguru, required this.title, required this.fotoprofil,}) : super(key: key);
+  final String judulcaptionguru;
+  final String captionguru;
+  final String caption1;
+  final String caption2;
+  const PageDetailForum(
+      {Key? key,
+      required this.caption1,
+      required this.caption2,
+      required this.imagebanner,
+      required this.nama1,
+      required this.nama2,
+      required this.guru,
+      required this.title,
+      required this.captionguru,
+      required this.judulcaptionguru,
+      required this.profil1,
+      required this.profil2,
+      required this.profilguru})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey[300],
-        title:  Text(
-          title, style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+        title: Text(
+          title,
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
       ),
@@ -54,19 +74,28 @@ class PageDetailForum extends StatelessWidget {
                         child: Container(
                           padding: const EdgeInsets.only(left: 15),
                           child: CircleAvatar(
-                            backgroundImage:
-                                AssetImage(fotoprofil),
+                            backgroundImage: AssetImage(profilguru),
                             radius: 25,
                           ),
                         ),
                         onTap: () => Navigator.pushNamed(
-                            context, Routes.guru13suharyuni),
+                          context,
+                          Routes.detailguru,
+                          arguments: {
+                            'namaLengkap': guru['nama'],
+                            'mapel': guru['mapel'],
+                            'profil':
+                                'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem IpsumLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum',
+                            'image': guru['image'],
+                            'hubungi': guru['nomor'],
+                          },
+                        ),
                       ),
                       const SizedBox(
                         height: 5,
                       ),
                       Text(
-                        namaguru,
+                        guru['nama']!,
                         style: Theme.of(context)
                             .textTheme
                             .bodyText2
@@ -101,13 +130,13 @@ class PageDetailForum extends StatelessWidget {
                       Row(
                         children: [
                           Image.asset(
-                            fotoprofil,
+                            profilguru,
                             width: 30,
                           ),
                           Container(
                             padding: const EdgeInsets.only(left: 5),
                             child: Text(
-                              namaguru,
+                              guru['nama']!,
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyText1
@@ -120,8 +149,7 @@ class PageDetailForum extends StatelessWidget {
                       ),
                       Container(
                         padding: const EdgeInsets.only(left: 35),
-                        child: Text(
-                            'Mengenal Program Studi Rekayasa Perangkat Lunak',
+                        child: Text(judulcaptionguru,
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyText2
@@ -130,8 +158,7 @@ class PageDetailForum extends StatelessWidget {
                       ),
                       Container(
                         padding: const EdgeInsets.only(left: 35),
-                        child: Text(
-                            'lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a',
+                        child: Text(captionguru,
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyText2
@@ -180,7 +207,7 @@ class PageDetailForum extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 35),
                         child: Row(
                           children: [
-                            Image.asset(fotoprofil, width: 30),
+                            Image.asset(profilguru, width: 30),
                             const SizedBox(
                               width: 10,
                             ),
@@ -199,11 +226,11 @@ class PageDetailForum extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          Image.asset(fotoprofil, width: 30),
+                          Image.asset(profil1, width: 30),
                           Container(
                             padding: const EdgeInsets.only(left: 5),
                             child: Text(
-                              'Daniandra prayudisty',
+                              nama1,
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyText2
@@ -216,8 +243,7 @@ class PageDetailForum extends StatelessWidget {
                       ),
                       Container(
                         padding: const EdgeInsets.only(left: 35),
-                        child: Text(
-                            'Mengenal Program Studi Rekayasa Perangkat Lunak',
+                        child: Text(judulcaptionguru,
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyText2
@@ -225,8 +251,7 @@ class PageDetailForum extends StatelessWidget {
                       ),
                       Container(
                         padding: const EdgeInsets.only(left: 35),
-                        child: Text(
-                            'lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a',
+                        child: Text(caption1,
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyText2
@@ -269,7 +294,7 @@ class PageDetailForum extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 35),
                         child: Row(
                           children: [
-                            Image.asset(fotoprofil, width: 30),
+                            Image.asset(profil1, width: 30),
                             const SizedBox(
                               width: 10,
                             ),
@@ -288,10 +313,10 @@ class PageDetailForum extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          Image.asset(fotoprofil, width: 30),
+                          Image.asset(profil2, width: 30),
                           Container(
                             padding: const EdgeInsets.only(left: 5),
-                            child: Text(nama1,
+                            child: Text(nama2,
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyText2
@@ -303,15 +328,14 @@ class PageDetailForum extends StatelessWidget {
                       ),
                       Container(
                         padding: const EdgeInsets.only(left: 35),
-                        child: const Text(
-                          'Mengenal Program Studi Rekayasa Perangkat Lunak',
+                        child: Text(
+                          judulcaptionguru,
                           style: TextStyle(fontSize: 12),
                         ),
                       ),
                       Container(
                         padding: const EdgeInsets.only(left: 35),
-                        child: Text(
-                            'lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a',
+                        child: Text(caption2,
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyText2
@@ -357,7 +381,7 @@ class PageDetailForum extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 35),
                         child: Row(
                           children: [
-                            Image.asset(fotoprofil, width: 30),
+                            Image.asset(profil2, width: 30),
                             const SizedBox(
                               width: 10,
                             ),
@@ -377,7 +401,7 @@ class PageDetailForum extends StatelessWidget {
                       Row(
                         children: [
                           Image.asset(
-                            fotoprofil,
+                            profil2,
                             width: 30,
                           ),
                           Container(
@@ -394,8 +418,7 @@ class PageDetailForum extends StatelessWidget {
                       ),
                       Container(
                         padding: const EdgeInsets.only(left: 35),
-                        child: Text(
-                            'Mengenal Program Studi Rekayasa Perangkat Lunak',
+                        child: Text(judulcaptionguru,
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyText2
@@ -403,8 +426,7 @@ class PageDetailForum extends StatelessWidget {
                       ),
                       Container(
                         padding: const EdgeInsets.only(left: 35),
-                        child: Text(
-                            'lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a',
+                        child: Text(caption2,
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyText2
@@ -447,7 +469,7 @@ class PageDetailForum extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 35),
                         child: Row(
                           children: [
-                            Image.asset(fotoprofil, width: 30),
+                            Image.asset(profil2, width: 30),
                             const SizedBox(
                               width: 10,
                             ),

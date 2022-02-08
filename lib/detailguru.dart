@@ -22,10 +22,11 @@ class Behavior extends ScrollBehavior {
 
 class PageDetailguru extends StatelessWidget {
   final String namaLengkap;
-  final String Mapel;
+  final String mapel;
   final String profil;
   final String image;
-  const PageDetailguru({Key? key, required this.Mapel, required this.namaLengkap, required this.profil, required this.image}) : super(key: key);
+  final String hubungi;
+  const PageDetailguru({Key? key, required this.mapel, required this.namaLengkap, required this.profil, required this.image, required this.hubungi}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +88,7 @@ class PageDetailguru extends StatelessWidget {
                           height: 2,
                         ),
                         Text(
-                          Mapel,
+                          mapel,
                           style: Theme.of(context).textTheme.bodyText2,
                         ),
                         const SizedBox(
@@ -123,7 +124,7 @@ class PageDetailguru extends StatelessWidget {
                           borderRadius: BorderRadius.circular(30.0))),
                   onPressed: () async {
                     try {
-                      await call('+6282188974105');
+                      await call(hubungi);
                       return;
                     } catch (e) {
                       showDialog(
