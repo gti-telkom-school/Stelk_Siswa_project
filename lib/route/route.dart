@@ -8,9 +8,6 @@ import 'package:tesss/detailforum.dart';
 import 'package:tesss/detailguru.dart';
 import 'package:tesss/forum/bertanya_forum_page.dart';
 import 'package:tesss/forum/forum_page.dart';
-import 'package:tesss/forum/tel_forum_page.dart';
-import 'package:tesss/forum/tja_forum_page.dart';
-import 'package:tesss/forum/tkj_forum_page.dart';
 import 'package:tesss/home/guru_page.dart';
 import 'package:tesss/home/kelaskutkj.dart';
 import 'package:tesss/home/kelola.dart';
@@ -238,16 +235,6 @@ class Routes {
 
       case uploadtugas:
         return pageRoute(const TugasBab1Binggris());
-
-      case tkjforumpage:
-        return pageRoute(const TkjForumPage());
-
-      case tjaforumpage:
-        return pageRoute(const TjaForumPage());
-
-      case telforumpage:
-        return pageRoute(const TelForumPage());
-
 
       case komentarpage:
         return pageRoute(const KomentarPage());

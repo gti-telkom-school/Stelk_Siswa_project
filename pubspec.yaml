@@ -46,6 +46,8 @@ dependencies:
   carousel_slider: ^4.0.0
   get: ^4.6.1
   url_launcher: ^6.0.18
+  protobuf: ^2.0.1
+  grpc: ^3.0.2
 
 dev_dependencies:
   flutter_test:
