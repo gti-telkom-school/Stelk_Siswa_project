@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.tesss">
+    package="com.dbrain.siswa">
    <application
         android:label="tesss"
         android:name="${applicationName}"
