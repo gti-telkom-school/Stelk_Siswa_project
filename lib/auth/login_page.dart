@@ -21,6 +21,15 @@ class _LoginPageState extends State<LoginPage> {
   late String id;
   late Timer timer;
   int times = 60;
+  bool isReady = false;
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration(seconds: 2))
+        .then((value) => setState(() => isReady = true));
+  }
+
   @override
   Widget build(BuildContext context) {
     if (isOtp) {
@@ -81,7 +90,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.indigo[400],
+                        primary: Colors.indigo[400],
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30.0))),
                     onPressed: () async {
@@ -102,10 +111,11 @@ class _LoginPageState extends State<LoginPage> {
                     },
                     child: SizedBox(
                       height: 45,
-                        width: MediaQuery.of(context).size.width,
-                        child: const Center(
-                          child: Text('login'),
-                        ),),
+                      width: MediaQuery.of(context).size.width,
+                      child: const Center(
+                        child: Text('Login'),
+                      ),
+                    ),
                   )
                 ],
               ),
@@ -114,194 +124,190 @@ class _LoginPageState extends State<LoginPage> {
         ),
       );
     }
+    double center = MediaQuery.of(context).size.height -
+        (MediaQuery.of(context).size.height * 60 / 100);
     return Scaffold(
       backgroundColor: const Color(0xffEAECEF),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Container(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 25.0,
-              vertical: 100
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                // const SizedBox(
-                //   height: 155,
-                // ),
-                Image.asset(
-                  'asset/logoappfix.png',
-                  width: 130,
-                ),
-                // const SizedBox(
-                //   height: 30.0,
-                // ),
-                Column(
-                  children: const [
-                    // Text(
-                    //   'Stelk',
-                    //   style:
-                    //       TextStyle(fontWeight: FontWeight.bold, fontSize: 35),
-                    // ),
-                    Text(
-                      'Siswa',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 40,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 40,
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(40),
-                      color: Colors.white),
-                  padding: const EdgeInsets.all(50),
-                  child: Column(
-                    children: [
-                      Text(
-                        'Masuk dengan nomor HP',
-                        style: Theme.of(context).textTheme.headline6?.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
-                      ),
-                      const SizedBox(
-                        height: 25,
-                      ),
-                      TextField(
-                        keyboardType: TextInputType.phone,
-                        controller: phoneNumber,
-                        decoration: InputDecoration(
-                            prefixIconConstraints: BoxConstraints(
-                             minHeight: 0,minWidth: 0,
-                           ),
-                           
-                          prefixIcon: Padding(
-                            padding: const EdgeInsets.only(left: 10),
-                            child: Text('+62 |', style: Theme.of(context).textTheme.subtitle1,),
-                          ),
-                          alignLabelWithHint: true,
-                          fillColor: Colors.grey[350],
-                          filled: true,
-                          contentPadding: const EdgeInsets.symmetric(
-                              vertical: 0, horizontal: 20),
-                          border: const OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  width: 1, color: Colors.transparent)),
-                          disabledBorder: const OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  width: 1, color: Colors.transparent)),
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(55),
-                              borderSide: const BorderSide(
-                                  width: 1, color: Colors.transparent)),
-                          errorBorder: const OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  width: 1, color: Colors.transparent)),
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(55),
-                              borderSide: const BorderSide(
-                                  width: 1, color: Colors.transparent)),
-                          focusedErrorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(55),
-                              borderSide: const BorderSide(
-                                  width: 1, color: Colors.transparent)),
-
-                          // focusedBorder: OutlineInputBorder(
-                          //   // borderSide: OutlinedBorder(),
-                          //   borderRadius: BorderRadius.circular(55),
-                          // )),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 25,
-                      ),
-                      Text(
-                        '6 digit OTP akan dikirim ke HP Kamu untuk verifikasi',
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.bodyText2,
-                      ),
-                      const SizedBox(
-                        height: 25,
-                      ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            primary: Colors.indigo[400],
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30.0))),
-                        onPressed: () async {
-                          try {
-                            await _auth.verifyPhoneNumber(
-                              phoneNumber: '+62' + phoneNumber.text,
-                              verificationCompleted:
-                                  (phoneAuthCredential) async =>
-                                      await _auth.signInWithCredential(
-                                          phoneAuthCredential),
-                              verificationFailed: (error) {
-                                showDialog(
-                                  context: context,
-                                  builder: (context) => AlertDialog(
-                                    content: Text(error.message.toString()),
-                                  ),
-                                );
-                                return;
-                              },
-                              timeout: const Duration(seconds: 30),
-                              codeSent: (verificationId, forceResendingToken) {
-                                id = verificationId;
-                                timer = Timer.periodic(
-                                    const Duration(seconds: 1), (t) {
-                                  if (times > 0) {
-                                    setState(() {
-                                      times -= 1;
-                                    });
-                                  } else {
-                                    timer.cancel();
-                                  }
-                                });
-                                setState(() {
-                                  isOtp = true;
-                                });
-                              },
-                              codeAutoRetrievalTimeout: (verificationId) {},
-                            );
-                            return;
-                          } catch (er) {
-                            log(er.toString());
-                            showDialog(
-                              context: context,
-                              builder: (context) => AlertDialog(
-                                content: Text(er.toString()),
-                              ),
-                            );
-                            return;
-                          }
-                        },
-                        child: SizedBox(
-                            height: 45,
-                            width: MediaQuery.of(context).size.width,
-                            child: Center(
-                              child: Text(
-                                'Login',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .button
-                                    ?.copyWith(color: Colors.white),
-                              ),
-                            )),
-                      )
-                    ],
+      body: Stack(
+        children: [
+          AnimatedPositioned(
+            top: isReady ? 195 : center,
+            duration: const Duration(milliseconds: 500),
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: Column(
+                children: [
+                  Image.asset(
+                    'asset/logoappfix.png',
+                    width: 130,
                   ),
-                  // height: 50,
-                  // width: 30,
-                ),
-              ],
+                  const Text(
+                    'Siswa',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 40,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
+          AnimatedPositioned(
+            duration: const Duration(milliseconds: 500),
+            bottom: isReady ? 100 : -800,
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: Container(
+                margin: EdgeInsets.all(20),
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(40),
+                    color: Colors.white),
+                padding: const EdgeInsets.all(50),
+                child: Column(
+                  children: [
+                    Text(
+                      'Masuk dengan nomor HP',
+                      style: Theme.of(context).textTheme.headline6?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
+                    const SizedBox(
+                      height: 25,
+                    ),
+                    TextField(
+                      keyboardType: TextInputType.phone,
+                      controller: phoneNumber,
+                      decoration: InputDecoration(
+                        prefixIconConstraints: const BoxConstraints(
+                          minHeight: 0,
+                          minWidth: 0,
+                        ),
+
+                        prefixIcon: Padding(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: Text(
+                            '+62 |',
+                            style: Theme.of(context).textTheme.subtitle1,
+                          ),
+                        ),
+                        alignLabelWithHint: true,
+                        fillColor: Colors.grey[350],
+                        filled: true,
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 0, horizontal: 20),
+                        border: const OutlineInputBorder(
+                            borderSide: BorderSide(
+                                width: 1, color: Colors.transparent)),
+                        disabledBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(
+                                width: 1, color: Colors.transparent)),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(55),
+                            borderSide: const BorderSide(
+                                width: 1, color: Colors.transparent)),
+                        errorBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(
+                                width: 1, color: Colors.transparent)),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(55),
+                            borderSide: const BorderSide(
+                                width: 1, color: Colors.transparent)),
+                        focusedErrorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(55),
+                            borderSide: const BorderSide(
+                                width: 1, color: Colors.transparent)),
+
+                        // focusedBorder: OutlineInputBorder(
+                        //   // borderSide: OutlinedBorder(),
+                        //   borderRadius: BorderRadius.circular(55),
+                        // )),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 25,
+                    ),
+                    Text(
+                      '6 digit OTP akan dikirim ke HP Kamu untuk verifikasi',
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.bodyText2,
+                    ),
+                    const SizedBox(
+                      height: 25,
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          primary: Colors.indigo[400],
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30.0))),
+                      onPressed: () async {
+                        try {
+                          await _auth.verifyPhoneNumber(
+                            phoneNumber: '+62' + phoneNumber.text,
+                            verificationCompleted:
+                                (phoneAuthCredential) async => await _auth
+                                    .signInWithCredential(phoneAuthCredential),
+                            verificationFailed: (error) {
+                              showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  content: Text(error.message.toString()),
+                                ),
+                              );
+                              return;
+                            },
+                            timeout: const Duration(seconds: 30),
+                            codeSent: (verificationId, forceResendingToken) {
+                              id = verificationId;
+                              timer = Timer.periodic(const Duration(seconds: 1),
+                                  (t) {
+                                if (times > 0) {
+                                  setState(() {
+                                    times -= 1;
+                                  });
+                                } else {
+                                  timer.cancel();
+                                }
+                              });
+                              setState(() {
+                                isOtp = true;
+                              });
+                            },
+                            codeAutoRetrievalTimeout: (verificationId) {},
+                          );
+                          return;
+                        } catch (er) {
+                          log(er.toString());
+                          showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              content: Text(er.toString()),
+                            ),
+                          );
+                          return;
+                        }
+                      },
+                      child: SizedBox(
+                          height: 45,
+                          width: MediaQuery.of(context).size.width,
+                          child: Center(
+                            child: Text(
+                              'Login',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .button
+                                  ?.copyWith(color: Colors.white),
+                            ),
+                          )),
+                    )
+                  ],
+                ),
+                // height: 50,
+                // width: 30,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
