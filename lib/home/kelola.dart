@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:tesss/kelola/kelola_akun.dart';
 import 'package:tesss/route/route.dart';
 import 'package:tesss/route/siswa.dart';
+
 class KelolaPage extends StatefulWidget {
   const KelolaPage({Key? key}) : super(key: key);
 
@@ -220,15 +221,41 @@ class _KelolaPageState extends State<KelolaPage> {
               thickness: 1,
             ),
             InkWell(
-              child: Container(
-                padding: const EdgeInsets.only(left: 13),
-                child: const Text(
-                  'Keluar',
-                  style: TextStyle(color: Colors.red),
+                child: Container(
+                  padding: const EdgeInsets.only(left: 13),
+                  child: const Text(
+                    'Keluar',
+                    style: TextStyle(color: Colors.red),
+                  ),
                 ),
-              ),
-              onTap: () => FirebaseAuth.instance.signOut(),
-            ),
+                onTap: () => showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                          title: Text('Keluar'),
+                          content:
+                              Text('Yakin Anda ingin keluar dari aplikasi?'),
+                          actions: [
+                            OutlinedButton(
+                                style: OutlinedButton.styleFrom(
+                                    primary: Colors.white),
+                                child: Text(
+                                  'Ya',
+                                  style: TextStyle(color: Colors.indigo[400]),
+                                ),
+                                onPressed: () {
+                                  FirebaseAuth.instance.signOut();
+                                  Navigator.pop(context);
+                                }),
+                            ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    primary: Colors.indigo[400]),
+                                onPressed: () => Navigator.pop(context),
+                                child: Text(
+                                  'Tidak',
+                                  style: TextStyle(color: Colors.white),
+                                )),
+                          ],
+                        ))),
             Center(
               child: Container(
                 padding: const EdgeInsets.only(top: 40),
