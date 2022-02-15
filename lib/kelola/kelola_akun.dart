@@ -44,7 +44,7 @@ class KelolaAkunPage extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.fromLTRB(130, 30, 0, 0),
                 child: const CircleAvatar(
-                   backgroundImage: AssetImage('asset/fotoorang.png'),
+                  backgroundImage: AssetImage('asset/fotoorang.png'),
                   radius: 50,
                 ),
               ),
@@ -171,7 +171,12 @@ class KelolaAkunPage extends StatelessWidget {
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(30.0))),
                             onPressed: () {
-                              const KelolaPage();
+                              showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  title: Text('Berhasil Memperbarui Data'),
+                                ),
+                              );
                             },
                             child: const SizedBox(
                                 width: 160,
