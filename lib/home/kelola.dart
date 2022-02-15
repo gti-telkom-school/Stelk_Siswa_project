@@ -231,9 +231,12 @@ class _KelolaPageState extends State<KelolaPage> {
                 onTap: () => showDialog(
                     context: context,
                     builder: (context) => AlertDialog(
-                          title: Text('Keluar'),
+                          title: const Text(
+                            'Keluar',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                           content:
-                              Text('Yakin Anda ingin keluar dari aplikasi?'),
+                              const Text('Yakin Anda ingin keluar dari aplikasi?'),
                           actions: [
                             OutlinedButton(
                                 style: OutlinedButton.styleFrom(
@@ -250,7 +253,7 @@ class _KelolaPageState extends State<KelolaPage> {
                                 style: ElevatedButton.styleFrom(
                                     primary: Colors.indigo[400]),
                                 onPressed: () => Navigator.pop(context),
-                                child: Text(
+                                child: const Text(
                                   'Tidak',
                                   style: TextStyle(color: Colors.white),
                                 )),

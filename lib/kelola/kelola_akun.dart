@@ -174,6 +174,8 @@ class KelolaAkunPage extends StatelessWidget {
                               showDialog(
                                 context: context,
                                 builder: (context) => AlertDialog(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(45)),
                                   title: Text('Berhasil Memperbarui Data'),
                                 ),
                               );
