@@ -20,7 +20,6 @@ import 'package:tesss/kelola/syaratdanketentuan.dart';
 import 'package:tesss/kelola/tentang_kami.dart';
 import 'package:tesss/route/tugasbab1binggris.dart';
 
-
 // import 'package:siswa/page/agama_mapel.dart';
 // import 'package:siswa/page/aij_mapel_page.dart';
 // import 'package:siswa/page/asjar_mapel_page.dart';
@@ -175,16 +174,33 @@ class Routes {
       case kelasku:
         return pageRoute(const KelaskuTKJ());
 
-         case detailforum: 
-      final Map<String, dynamic> args =
+      case detailforum:
+        final Map<String, dynamic> args =
             settings.arguments as Map<String, dynamic>;
-            return pageRoute(PageDetailForum(caption1: args['caption1'], caption2: args['caption2'], imagebanner: args['imagebanner'], nama1: args['nama1'], nama2: args['nama2'], guru: args['guru'], title: args['title'], captionguru: args['captionguru'], judulcaptionguru: args['judulcaptionguru'], profil1: args['profil1'], profil2: args['profil2'], profilguru: args['profilguru']));
+        return pageRoute(PageDetailForum(
+            caption1: args['caption1'],
+            caption2: args['caption2'],
+            imagebanner: args['imagebanner'],
+            nama1: args['nama1'],
+            nama2: args['nama2'],
+            guru: args['guru'],
+            title: args['title'],
+            captionguru: args['captionguru'],
+            judulcaptionguru: args['judulcaptionguru'],
+            profil1: args['profil1'],
+            profil2: args['profil2'],
+            profilguru: args['profilguru']));
 
-
-      case detailguru: 
-      final Map<String, dynamic> args =
+      case detailguru:
+        final Map<String, dynamic> args =
             settings.arguments as Map<String, dynamic>;
-            return pageRoute(PageDetailguru(mapel: args['mapel'], namaLengkap: args['namaLengkap'], profil: args['profil'], image: args['image'], hubungi: args['hubungi'],));
+        return pageRoute(PageDetailguru(
+          mapel: args['mapel'],
+          namaLengkap: args['namaLengkap'],
+          profil: args['profil'],
+          image: args['image'],
+          hubungi: args['hubungi'],
+        ));
 
       case detailPelajaran:
         final Map<String, dynamic> args =
@@ -232,9 +248,8 @@ class Routes {
       case prestasi:
         return pageRoute(const PrestasiPage());
 
-
       case uploadtugas:
-        return pageRoute(const TugasBab1Binggris());
+        return pageRoute(TugasBab1Binggris());
 
       case komentarpage:
         return pageRoute(const KomentarPage());

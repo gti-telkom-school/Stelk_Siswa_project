@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tesss/route/route.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class TugasBab1Binggris extends StatelessWidget {
-  const TugasBab1Binggris({Key? key}) : super(key: key);
+  TugasBab1Binggris({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -240,6 +244,13 @@ class TugasBab1Binggris extends StatelessWidget {
                               borderRadius: BorderRadius.circular(50)),
                           title: Text('Berhasil Mengirim Tugas '),
                         )),
+                      ).timeout(
+                        Duration(seconds: 1),
+                        onTimeout: () {
+                          Navigator.pop(context);
+                          Navigator.pop(context);
+                          return;
+                        },
                       );
                     },
                   ),
