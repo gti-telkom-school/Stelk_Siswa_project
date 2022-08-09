@@ -8,21 +8,9 @@ class TentangKamiPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey[300],
-        title: Row(
-          children: [
-            // const Icon(
-            //   Icons.arrow_back,
-            //   color: Colors.black,
-            // ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 50),
-              child: const Text(
-                'Tentang Kami',
-                style:
-                    TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-              ),
-            ),
-          ],
+        title: const Text(
+          'Tentang Kami',
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
       ),

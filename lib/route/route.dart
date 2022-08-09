@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:tesss/auth/login_page.dart';
@@ -11,10 +12,13 @@ import 'package:tesss/forum/forum_page.dart';
 import 'package:tesss/home/guru_page.dart';
 import 'package:tesss/home/kelaskutkj.dart';
 import 'package:tesss/home/kelola.dart';
-import 'package:tesss/home/komentar_page.dart';
+import 'package:tesss/home/komentar_page_aktivitas.dart';
+import 'package:tesss/home/komentar_page_forum.dart';
+import 'package:tesss/home/komentar_page_prestasi.dart';
 import 'package:tesss/home/prestasi_page.dart';
 import 'package:tesss/kelola/bantuan.dart';
 import 'package:tesss/kelola/kebijakanprivasi.dart';
+import 'package:tesss/kelola/kelola_akun.dart';
 import 'package:tesss/kelola/pemberitahuan.dart';
 import 'package:tesss/kelola/syaratdanketentuan.dart';
 import 'package:tesss/kelola/tentang_kami.dart';
@@ -97,6 +101,7 @@ class Routes {
   static const String forum = '/forum';
   static const String guru = '/guru';
   static const String prestasi = '/prestasi';
+  static const String kelolaakun = '/kelolaakun';
   static const String binggrismapelpage = '/binggrismapelpage';
   static const String bindomapelpage = '/bindomapelpage';
   static const String mtkmapelpage = '/mtkmapelpage';
@@ -153,7 +158,9 @@ class Routes {
   static const String tjaforumpage = '/tjaforumpage';
   static const String telforumpage = '/telforumpage';
   static const String upwforumpage = '/upwforumpage';
-  static const String komentarpage = '/komentarpage';
+  static const String komentarpageaktivitas = '/komentarpageaktivitas';
+  static const String komentarpageprestasi = '/komentarprestasiprestasi';
+  static const String komentarpageforum = '/komentarpageforum';
   static const String bertanyaforumpage = '/bertanyafotumpage';
   static const String pemberitahuan = '/pemberitahuan';
   static const String syaratdanketentuan = '/syaratdanketentuan';
@@ -178,6 +185,7 @@ class Routes {
         final Map<String, dynamic> args =
             settings.arguments as Map<String, dynamic>;
         return pageRoute(PageDetailForum(
+            id: args['id'],
             caption1: args['caption1'],
             caption2: args['caption2'],
             imagebanner: args['imagebanner'],
@@ -239,20 +247,46 @@ class Routes {
           ),
         );
 
+      case kelolaakun:
+        return pageRoute(
+            KelolaAkunPage(uid: FirebaseAuth.instance.currentUser!.uid));
+
       case forum:
         return pageRoute(const ForumPage());
 
       case guru:
-        return pageRoute(const GuruPage());
+        final Map<String, dynamic> args =
+            settings.arguments as Map<String, dynamic>;
+        return pageRoute(GuruPage(
+          jurusan: args['jurusan'],
+          kelas: args['kelas'],
+          tingkat: args['tingkat'],
+        ));
 
       case prestasi:
         return pageRoute(const PrestasiPage());
 
+      case komentarpageprestasi:
+        final Map<String, dynamic> args =
+            settings.arguments as Map<String, dynamic>;
+        return pageRoute(KomentarPagePrestasi(
+          id: args['id'],
+        ));
+
       case uploadtugas:
         return pageRoute(TugasBab1Binggris());
 
-      case komentarpage:
-        return pageRoute(const KomentarPage());
+      case komentarpageforum:
+        final Map<String, dynamic> args =
+            settings.arguments as Map<String, dynamic>;
+        return pageRoute(KomentarPageForum(id: args['id']));
+
+      case komentarpageaktivitas:
+        final Map<String, dynamic> args =
+            settings.arguments as Map<String, dynamic>;
+        return pageRoute(KomentarPageAktivitas(
+          id: args['id'],
+        ));
 
       case bertanyaforumpage:
         return pageRoute(const BertanyaForumPage());

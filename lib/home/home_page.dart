@@ -1,9 +1,11 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tesss/route/route.dart';
-import 'package:tesss/route/siswa.dart';
+import 'package:provider/provider.dart';
+import 'package:string_extensions/string_extensions.dart';
+import 'package:tesss/src/generated/siswa.service.pbgrpc.dart';
+
 class Behavior extends ScrollBehavior {
   @override
   Widget buildViewportChrome(
@@ -15,78 +17,9 @@ class Behavior extends ScrollBehavior {
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
-  // static List<Jurusan> fromJsonArray(List<dynamic> jsonArray){
-  //   List<Jurusan> jurusanFromJson = [];
-  // }
-
-  Future<List<Siswa>> getData() async {
-    try {
-      final result = await FirebaseFirestore.instance.collection("Siswa").get();
-      return result.docs.map(
-        (e) {
-          return Siswa.fromJson(
-            e.data(),
-          );
-        },
-      ).toList();
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  Future<List<DatabaseSiswa>> getDataa() async {
-    try {
-      final result =
-          await FirebaseFirestore.instance.collection('DatabaseSiswa').get();
-      return result.docs
-          .map(
-            (e) => DatabaseSiswa.fromJson(
-              e.data(),
-            ),
-          )
-          .toList();
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  // Future<List<Guru>> get() async {
-  //   try {
-  //     final result = await FirebaseFirestore.instance.collection("Guru").get();
-  //     return result.docs
-  //         .map(
-  //           (e) => Guru(
-  //             name: e["nameu"],
-  //             mapel: e["mapel"],
-  //           ),
-  //         )
-  //         .toList();
-  //   } catch (e) {
-  //     rethrow;
-  //   }
-  // }
-
-  // Future<List<Article>> gett() async {
-  //   try {
-  //     final result = await FirebaseFirestore.instance.collection("Article").get();
-  //     return result.docs
-  //         .map(
-  //           (e) => Article(
-  //             id: e["id"],
-  //             type: e["type"],
-  //             time: e["time"],
-  //             text: e["text"],
-  //             title: e["title"],
-  //           ),
-  //         )
-  //         .toList();
-  //   } catch (e) {
-  //     rethrow;
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
+    final dataSiswa = context.watch<Siswa>();
     final listImage = [
       'asset/logofixxxx.png',
       'asset/abualikotak.png',
@@ -181,10 +114,15 @@ class HomePage extends StatelessWidget {
                       controller: s,
                       slivers: [
                         SliverToBoxAdapter(
-                          child: Column(
+                          child
+                              // child: !dataSiswa.hasId()
+                              // ? Center(child: LinearProgressIndicator())
+                              : Column(
                             children: [
                               Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 15,),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 15,
+                                ),
                                 child: Container(
                                   width: MediaQuery.of(context).size.width,
                                   height: 100,
@@ -204,69 +142,58 @@ class HomePage extends StatelessWidget {
                                       Container(
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 15, vertical: 15),
-                                        child: FutureBuilder<List<DatabaseSiswa>>(
-                                          future: getDataa(),
-                                          builder: (context, snapshot) {
-                                            if (snapshot.hasError) {
-                                              return Text(
-                                                  snapshot.error.toString());
-                                            }
-                                            final data = snapshot.data;
-                                            if (data != null &&
-                                                snapshot.hasData) {
-                                              return Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                        'Halo, ' +
-                                                            data[0]
-                                                                .nameu
-                                                                .toString(),
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .bodyText1
-                                                            ?.copyWith(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold)
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                                'Halo, Daniandra Prayudisty Ilham',
+                                                // dataSiswa.nama
+                                                //     .toString()
+                                                //     .toTitleCase
+                                                //     .toString(),
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyText1
+                                                    ?.copyWith(
+                                                        fontWeight:
+                                                            FontWeight.bold)
 
-                                                        // TextStyle(
-                                                        //     fontWeight:
-                                                        //         FontWeight.bold),
-                                                        ),
-                                                    Text(
-                                                      data[0].jurusan.toString(),
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .caption,
-                                                    ),
-                                                    Text(
-                                                      'Tingkat ' +
-                                                          data[0]
-                                                              .tingkat
-                                                              .toString(),
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .caption,
-                                                    ),
-                                                    Text(
-                                                      data[0].kelas,
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .caption,
-                                                    ),
-                                                  ]);
-                                            }
-                                            return const Center(
-                                              child: CircularProgressIndicator(),
-                                            );
-                                          },
+                                                // TextStyle(
+                                                //     fontWeight:
+                                                //         FontWeight.bold),
+                                                ),
+                                            Text(
+                                              dataSiswa.jurusan
+                                                  .toString()
+                                                  .toTitleCase
+                                                  .toString(),
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .caption,
+                                            ),
+                                            Text(
+                                              dataSiswa.tingkat
+                                                  .toString()
+                                                  .toTitleCase
+                                                  .toString(),
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .caption,
+                                            ),
+                                            Text(
+                                              dataSiswa.kelas.toString(),
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .caption,
+                                            ),
+                                          ],
                                         ),
                                       ),
                                       const Spacer(),
                                       Container(
-                                        padding: const EdgeInsets.only(right: 20),
+                                        padding:
+                                            const EdgeInsets.only(right: 20),
                                         child: const CircleAvatar(
                                           backgroundImage:
                                               AssetImage('asset/fotoorang.png'),
@@ -301,9 +228,15 @@ class HomePage extends StatelessWidget {
                                 onTap: () =>
                                     Navigator.pushNamed(context, Routes.forum)),
                             InkWell(
-                                child: Image.asset('asset/gurufix.png'),
-                                onTap: () =>
-                                    Navigator.pushNamed(context, Routes.guru)),
+                              child: Image.asset('asset/gurufix.png'),
+                              onTap: () => Navigator.pushNamed(
+                                  context, Routes.guru,
+                                  arguments: {
+                                    'tingkat': dataSiswa.tingkat,
+                                    'kelas': dataSiswa.kelas,
+                                    'jurusan': dataSiswa.jurusan,
+                                  }),
+                            ),
                             InkWell(
                                 child: Image.asset('asset/prestasifix.png'),
                                 onTap: () => Navigator.pushNamed(

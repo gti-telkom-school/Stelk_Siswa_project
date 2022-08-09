@@ -1,31 +1,34 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:tesss/home/kelola.dart';
-import 'package:tesss/route/siswa.dart';
-// import 'package:siswa/page/kelola.dart';
-// import 'package:siswa/page/siswa.dart';
+import 'package:tesss/services/services.dart';
+import 'package:provider/provider.dart';
+import 'package:tesss/src/generated/siswa.service.pbgrpc.dart';
+import 'package:string_extensions/string_extensions.dart';
 
 class KelolaAkunPage extends StatelessWidget {
-  const KelolaAkunPage({Key? key}) : super(key: key);
+  KelolaAkunPage({Key? key, required this.uid}) : super(key: key);
 
-  Future<List<DatabaseSiswa>> getDataa() async {
-    try {
-      final result =
-          await FirebaseFirestore.instance.collection('DatabaseSiswa').get();
-      return result.docs
-          .map(
-            (e) => DatabaseSiswa.fromJson(
-              e.data(),
-            ),
-          )
-          .toList();
-    } catch (e) {
-      rethrow;
-    }
-  }
+  final String uid;
+  TextEditingController controller = TextEditingController();
+  TextEditingController controllerr = TextEditingController();
+
+  // Future<Siswa> getDataa() async {
+  //   try {
+  //     final uid = FirebaseAuth.instance.currentUser?.uid;
+  //     final result =
+  //         await FirebaseFirestore.instance.collection('siswa').doc(uid).get();
+  //     final data = result.data();
+  //     if (data != null) {
+  //       return Siswa.fromJson(data.toString());
+  //     }
+  //     throw "Error";
+  //   } catch (e) {
+  //     rethrow;
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
+    final dataSiswa = context.watch<Siswa>();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey[300],
@@ -38,36 +41,32 @@ class KelolaAkunPage extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 15),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                padding: const EdgeInsets.fromLTRB(130, 30, 0, 0),
-                child: const CircleAvatar(
-                  backgroundImage: AssetImage('asset/fotoorang.png'),
-                  radius: 50,
-                ),
-              ),
-              FutureBuilder<List<DatabaseSiswa>>(
-                future: getDataa(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasError) {
-                    return Text(snapshot.error.toString());
-                  }
-                  final data = snapshot.data;
-                  if (data != null && snapshot.hasData) {
-                    return Column(
+          child: dataSiswa.id == null
+              ? const Center(child: LinearProgressIndicator())
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
+                      child: Center(
+                        child: const CircleAvatar(
+                          backgroundImage: AssetImage('asset/fotoorang.png'),
+                          radius: 50,
+                        ),
+                      ),
+                    ),
+                    Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(
-                          height: 50,
+                          height: 30,
                         ),
                         Text(
                           'NIS',
                           style: Theme.of(context).textTheme.bodyText2,
                         ),
                         Text(
-                          data[0].nis.toString(),
+                          dataSiswa.nis.toString(),
                           style: Theme.of(context).textTheme.bodyText2,
                         ),
                         const Divider(
@@ -81,7 +80,7 @@ class KelolaAkunPage extends StatelessWidget {
                           style: Theme.of(context).textTheme.bodyText2,
                         ),
                         Text(
-                          data[0].nameu.toString(),
+                          dataSiswa.nama.toString().toTitleCase.toString(),
                           style: Theme.of(context).textTheme.bodyText2,
                         ),
                         const Divider(
@@ -95,7 +94,7 @@ class KelolaAkunPage extends StatelessWidget {
                           style: Theme.of(context).textTheme.bodyText2,
                         ),
                         Text(
-                          data[0].jurusan.toString(),
+                          dataSiswa.jurusan.toString(),
                           style: Theme.of(context).textTheme.bodyText2,
                         ),
                         const Divider(
@@ -109,7 +108,7 @@ class KelolaAkunPage extends StatelessWidget {
                           style: Theme.of(context).textTheme.bodyText2,
                         ),
                         Text(
-                          data[0].tingkat.toString(),
+                          dataSiswa.tingkat.toString().toTitleCase.toString(),
                           style: Theme.of(context).textTheme.bodyText2,
                         ),
                         const Divider(
@@ -118,9 +117,9 @@ class KelolaAkunPage extends StatelessWidget {
                           // endIndent: 15,
                           thickness: 1,
                         ),
-                        const Text('kelas'),
+                        const Text('Kelas'),
                         Text(
-                          data[0].kelas.toString(),
+                          dataSiswa.kelas.toString(),
                         ),
                         const Divider(
                           height: 30,
@@ -133,9 +132,10 @@ class KelolaAkunPage extends StatelessWidget {
                           style: Theme.of(context).textTheme.bodyText2,
                         ),
                         TextField(
+                          controller: controller,
                           decoration: InputDecoration(
-                            hintText: data[0].nomorhp,
-                            suffixIcon: Icon(
+                            hintText: controller.text,
+                            suffixIcon: const Icon(
                               Icons.create_outlined,
                             ),
                           ),
@@ -148,19 +148,14 @@ class KelolaAkunPage extends StatelessWidget {
                           style: Theme.of(context).textTheme.bodyText2,
                         ),
                         TextField(
+                          controller: controllerr,
                           decoration: InputDecoration(
-                            hintText: data[0].email,
-                            suffixIcon: Icon(
+                            hintText: controllerr.text,
+                            suffixIcon: const Icon(
                               Icons.create_outlined,
                             ),
                           ),
                         ),
-                        // const Divider(
-                        //   height: 30,
-                        //   indent: 15,
-                        //   endIndent: 15,
-                        //   thickness: 1,
-                        // ),
                         const SizedBox(
                           height: 30,
                         ),
@@ -171,32 +166,39 @@ class KelolaAkunPage extends StatelessWidget {
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(30.0))),
                             onPressed: () {
+                              Services().updateSiswaNomorHPEmail(
+                                id: uid,
+                                email: controllerr.text,
+                                nomorHP: controller.text,
+                              );
                               showDialog(
                                 context: context,
                                 builder: (context) => AlertDialog(
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(45)),
-                                  title: Text('Berhasil Memperbarui Data'),
+                                  title:
+                                      const Text('Berhasil Memperbarui Data'),
                                 ),
+                              ).timeout(
+                                const Duration(seconds: 1),
+                                onTimeout: () {
+                                  Navigator.pop(context);
+                                  Navigator.pop(context);
+                                },
                               );
                             },
                             child: const SizedBox(
-                                width: 160,
-                                child: Center(
-                                  child: Text('Simpan'),
-                                )),
+                              width: 160,
+                              child: Center(
+                                child: Text('Simpan'),
+                              ),
+                            ),
                           ),
                         ),
                       ],
-                    );
-                  }
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                },
-              ),
-            ],
-          ),
+                    )
+                  ],
+                ),
         ),
       ),
     );

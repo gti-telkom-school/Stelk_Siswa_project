@@ -1,0 +1,23 @@
+syntax="proto3";
+
+package public;
+
+option go_package="github.com/gti-telkom-school/public-service/server/proto";
+
+service Public {
+    rpc AdminCheck (ReqPhoneNumber) returns (ResCheck);
+
+    rpc GuruCheck (ReqPhoneNumber) returns (ResCheck);
+
+    rpc SiswaCheck (ReqPhoneNumber) returns (ResCheck);
+}
+
+message ResCheck {
+    string status = 1;
+    string reason = 2;
+    string phoneNumber = 3;
+}
+
+message ReqPhoneNumber {
+    string phoneNumber = 1;
+}

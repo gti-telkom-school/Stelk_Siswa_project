@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "137939744751",
+    "project_id": "stelk-telkom-development",
+    "storage_bucket": "stelk-telkom-development.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:137939744751:android:9100b6ad0d2f970133e81a",
+        "android_client_info": {
+          "package_name": "com.dbrain.guru"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "137939744751-qbo7u9ulreoooe9cr2fsqm7tih4qsfj9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dbrain.guru",
+            "certificate_hash": "71a5e6810105d823e5fde894e4450fca47486eb3"
+          }
+        },
+        {
+          "client_id": "137939744751-7a74cefo5pgist1kutc25iffnjlo21mh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrJykcv5PZ-oo7hqXhvWy8NaTNOtYnkmM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "137939744751-7a74cefo5pgist1kutc25iffnjlo21mh.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "137939744751-3nl9lq9m15vj5l3bidnjmnhk7l5902su.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.dbrain.siswa"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:137939744751:android:d042426726067c0433e81a",
+        "android_client_info": {
+          "package_name": "com.dbrain.siswa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "137939744751-v2a8gg8ssqpkgslu5u8br78nomm7cvdl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dbrain.siswa",
+            "certificate_hash": "71a5e6810105d823e5fde894e4450fca47486eb3"
+          }
+        },
+        {
+          "client_id": "137939744751-7a74cefo5pgist1kutc25iffnjlo21mh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrJykcv5PZ-oo7hqXhvWy8NaTNOtYnkmM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "137939744751-7a74cefo5pgist1kutc25iffnjlo21mh.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "137939744751-3nl9lq9m15vj5l3bidnjmnhk7l5902su.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.dbrain.siswa"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

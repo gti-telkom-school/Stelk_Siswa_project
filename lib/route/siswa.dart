@@ -2,27 +2,27 @@ import 'dart:convert';
 // import 'package:http/http.dart' as http;
 import 'package:http/http.dart' show Client;
 
-class Siswa {
-  final String nama;
-  final String kelas;
-  final int nis;
-  List<String> hobi;
+// class Siswa {
+//   final String nama;
+//   final String kelas;
+//   final int nis;
+//   List<String> hobi; s
 
-  Siswa({
-    required this.nama,
-    required this.kelas,
-    required this.nis,
-    required this.hobi,
-  });
+//   Siswa({
+//     required this.nama,
+//     required this.kelas,
+//     required this.nis,
+//     required this.hobi,
+//   });
 
-  factory Siswa.fromJson(Map<String, dynamic> json) {
-    return Siswa(
-      nama: json['Nama'],
-      nis: json['NIS'],
-      kelas: json['Kelas'],
-      hobi: List<String>.from(json['hobi']),
-    );
-  }
+//   factory Siswa.fromJson(Map<String, dynamic> json) {
+//     return Siswa(
+//       nama: json['Nama'],
+//       nis: json['NIS'],
+//       kelas: json['Kelas'],
+//       hobi: List<String>.from(json['hobi']),
+//     );
+//   }
 
 // class Jurusan {
 //   static List<Jurusan> fromJsonArray(List<dynamic> jsonArray) {
@@ -38,46 +38,7 @@ class Siswa {
 //   static Jurusan fromJson(jsonData) {
 
 //   }
-}
-
-class DatabaseSiswa {
-  final String nameu;
-  final String kelas;
-  final String nis;
-  final String jeniskelamin;
-  // final List<String> hobi;
-  final String? jurusan;
-  final String? tingkat;
-  final String nomorhp;
-  final String email;
-
-  DatabaseSiswa({
-    required this.nameu,
-    // required this.hobi,
-    required this.kelas,
-    required this.jeniskelamin,
-    required this.nis,
-    required this.jurusan,
-    required this.tingkat,
-    required this.nomorhp,
-    required this.email,
-  });
-
-  factory DatabaseSiswa.fromJson(Map<String, dynamic> map) {
-    print(map);
-    return DatabaseSiswa(
-      nameu: map["nama"],
-      kelas: map["kelas"],
-      jeniskelamin: map["jeniskelamin"],
-      nis: map["nis"],
-      jurusan: map["jurusan"],
-      tingkat: map["tingkat"],
-      nomorhp: map["nomorhp"],
-      email: map["email"],
-      // hobi: List<String>.from(map['hobi']),
-    );
-  }
-}
+// }
 
 class Guru {
   final String name;

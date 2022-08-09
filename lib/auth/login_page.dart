@@ -2,9 +2,9 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:tesss/services/services.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -242,8 +242,10 @@ class _LoginPageState extends State<LoginPage> {
                               borderRadius: BorderRadius.circular(30.0))),
                       onPressed: () async {
                         try {
+                          final result = await Services()
+                              .checkUser(phoneNumber: '+62' + phoneNumber.text);
                           await _auth.verifyPhoneNumber(
-                            phoneNumber: '+62' + phoneNumber.text,
+                            phoneNumber: result.phoneNumber,
                             verificationCompleted:
                                 (phoneAuthCredential) async => await _auth
                                     .signInWithCredential(phoneAuthCredential),

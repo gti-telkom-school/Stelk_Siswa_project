@@ -1,0 +1,190 @@
+syntax = "proto3";
+
+package forum;
+
+option go_package = "forum-service/server/proto";
+
+import "google/protobuf/timestamp.proto";
+
+message Pembina {
+    string id = 1;
+    string nik = 2;
+    string nama = 3;
+    string image = 4;
+}
+
+message Forum {
+    string id = 1;
+    string nama = 2;
+    repeated Pembina pembina = 3;
+    string image = 4;
+    google.protobuf.Timestamp createdAt = 5;
+    google.protobuf.Timestamp updatedAt = 6;
+}
+
+message Comment {
+    string id = 1;
+    string idForum = 2;
+    string idPost = 3;
+    string isi = 4;
+    string username = 5;
+    string userImage = 6;
+    google.protobuf.Timestamp createdAt = 7;
+    google.protobuf.Timestamp updatedAt = 8;
+}
+
+message Post {
+    string id = 1;
+    string idForum = 2;
+    string judul = 3;
+    string isi = 4;
+    string username = 5;
+    string userImage = 6;
+    google.protobuf.Timestamp createdAt = 7;
+    google.protobuf.Timestamp updatedAt = 8;
+}
+
+service ForumService {
+    //Dashboard
+    rpc Create (ReqCreate) returns (ResCreate);
+    rpc Update (ReqUpdate) returns (ResUpdate);
+    rpc Delete (ReqDelete) returns (ResDelete);
+    rpc Search (ReqSearch) returns (ResSearch);
+
+    //All
+    rpc FindAll (ReqFindAll) returns (ResFindAll);
+
+
+    //Guru
+    rpc CreatePost (ReqCreatePost) returns (ResCreatePost);
+
+    //Guru & Siswa
+    rpc FindPost (ReqFindPost) returns (ResFindPost);
+    rpc FindComment (ReqFindComment) returns (ResFindComment);
+    rpc CountComment (ReqCountComment) returns (ResCountComment);
+    rpc CreateComment (ReqCreateComment) returns (ResCreateComment);
+}
+
+message ReqCreate {
+    string nama = 1;
+    repeated Pembina pembina = 2;
+}
+
+message ResCreate {
+    string status = 1;
+    string reason = 2;
+    Forum data = 3;
+}
+
+message ReqUpdate {
+    string idForum = 1;
+    string nama = 2;
+    repeated Pembina pembina = 3;
+}
+
+message ResUpdate {
+    string status = 1;
+    string reason = 2;
+    ReqUpdate data = 3;
+}
+
+message ReqDelete {
+    string idForum = 1;
+}
+
+message ResDelete {
+    string status = 1;
+    string reason = 2;
+    ReqDelete data = 3;
+}
+
+message ReqSearch {
+    string query = 1;
+    int32 limit = 2;
+    string lastDocId = 3;
+}
+
+message ResSearch {
+    string status = 1;
+    string reason = 2;
+    repeated Forum data = 3;
+    ReqSearch req = 4;
+}
+
+message ReqFindAll {
+    int32 limit = 1;
+    string lastDocId = 2;
+}
+
+message ResFindAll {
+    string status = 1;
+    string reason = 2;
+    repeated Forum data = 3;
+    ReqFindAll req = 4;
+}
+
+message ReqCreatePost {
+    string idForum = 1;
+    string judul = 2;
+    string isi = 3;
+    string username = 4;
+    string userImage = 5;
+}
+
+message ResCreatePost {
+    string status = 1;
+    string reason = 2;
+    Post data = 3;
+}
+
+message ReqFindPost {
+    string idForum = 1;
+    int32 limit = 2;
+    string lastDocId = 3;
+}
+
+message ResFindPost {
+    string status = 1;
+    string reason = 2;
+    repeated Post data = 3;
+    ReqFindPost req = 4;
+}
+
+message ReqFindComment {
+    string idForum = 1;
+    string idPost =2;
+    int32 limit = 3;
+    string lastDocId = 4;
+}
+
+message ResFindComment {
+    string status = 1;
+    string reason = 2;
+    repeated Comment data = 3;
+    ReqFindComment req = 4;
+}
+
+message ReqCountComment {
+    string idForum = 1;
+    string idPost = 2;
+}
+
+message ResCountComment {
+    string status = 1;
+    string reason = 2;
+    int32 count = 3;
+}
+
+message ReqCreateComment {
+    string idForum = 1;
+    string idPost = 2;
+    string isi = 3;
+    string username = 4;
+    string userImage = 5;
+}
+
+message ResCreateComment {
+    string status = 1;
+    string reason = 2;
+    Comment comment = 3;
+}

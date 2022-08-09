@@ -8,17 +8,12 @@ class PemberitahuanPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey[300],
-        title: Row(
-          children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 50),
-              child: const Text(
-                'Pemberitahuan',
-                style:
-                    TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-              ),
-            ),
-          ],
+        title: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 50),
+          child: const Text(
+            'Pemberitahuan',
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          ),
         ),
         centerTitle: true,
       ),

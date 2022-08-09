@@ -1,0 +1,148 @@
+syntax = "proto3";
+
+option go_package = "github.com/gti-telkom-school/siswa-service/server/proto";
+
+import "google/protobuf/timestamp.proto";
+
+package siswa;
+
+// Data
+message Siswa {
+  string id = 1;
+  string nis = 2;
+  string nama = 3;
+  string nomorHP = 4;
+  string email = 5;
+  string foto = 6;
+  string jurusan = 7;
+  string tingkat = 8;
+  string kelas = 9;
+  google.protobuf.Timestamp createdAt = 10;
+  google.protobuf.Timestamp updatedAt = 11;
+}
+
+service ServiceSiswa {
+
+
+  // Web
+  rpc FindSiswa (ReqFindSiswa) returns (ResFindSiswa);
+  rpc CreateSiswa (ReqCreateSiswa) returns (ResCreateSiswa);
+  rpc UpdateSiswa (ReqUpdateSiswa) returns (ResUpdateSiswa);
+  rpc DeleteSiswa (ReqDeleteSiswa) returns (ResDeleteSiswa);
+  rpc SearchSiswa (ReqSearchSiswa) returns (ResSearchSiswa);
+
+  // Mobile
+  rpc CheckUser(ReqCheckUser) returns (ResCheckUser);
+
+  // Home
+  rpc FindSiswaInMobile (ReqFindSiswaInMobile) returns (ResFindSiswaInMobile);
+  // Settings
+  rpc UpdateSiswaNomorHPEmail (ReqUpdateSiswaNomorHPEmail) returns (ResUpdateSiswaNomorHPEmail);
+}
+
+message ReqCheckUser {
+  string phoneNumber = 1;
+}
+
+message ResCheckUser {
+  string status = 1;
+  string reason = 2;
+}
+
+// Web
+message ReqFindSiswa {
+  int32 limit = 1;
+  int32 lastIndex = 2;
+}
+
+message ResFindSiswa {
+  string reason = 1;
+  string status = 2;
+  repeated Siswa data = 3;
+  ReqFindSiswa req = 4;
+}
+
+message ReqCreateSiswa {
+  string nis = 1;
+  string nama = 2;
+  string nomorHP = 3;
+  string email = 4;
+  string jurusan = 5;
+  string tingkat = 6;
+  string kelas = 7;
+}
+
+message ResCreateSiswa {
+  string reason = 1;
+  string status = 2;
+  Siswa data = 3;
+  ReqCreateSiswa req = 4;
+}
+
+message ReqUpdateSiswa {
+  string id = 1;
+  string nis = 2;
+  string nama = 3;
+  string nomorHP = 4;
+  string email = 5;
+  string jurusan = 6;
+  string tingkat = 7;
+  string kelas = 8;
+}
+
+message ResUpdateSiswa {
+  string reason = 1;
+  string status = 2;
+  ReqUpdateSiswa req = 3;
+}
+
+message ReqDeleteSiswa {
+  string id = 1;
+}
+
+message ResDeleteSiswa {
+  string reason = 1;
+  string status = 2;
+  ReqDeleteSiswa req = 3;
+}
+
+message ReqSearchSiswa {
+  string query = 1;
+  int32 limit = 2;
+  int32 lastIndex = 3;
+}
+
+message ResSearchSiswa {
+  string reason = 1;
+  string status = 2;
+  repeated Siswa data = 3;
+  ReqSearchSiswa req = 4;
+}
+
+// Mobile
+message ReqFindSiswaInMobile {
+  string id = 1;
+  string nis = 2;
+  string jurusan = 3;
+  string tingkat = 4;
+  string kelas = 5;
+}
+
+message ResFindSiswaInMobile {
+  string reason = 1;
+  string status = 2;
+  Siswa data = 3;
+  ReqFindSiswaInMobile req = 4;
+}
+
+message ReqUpdateSiswaNomorHPEmail {
+  string id = 1;
+  string nomorHP = 2;
+  string email = 3;
+}
+
+message ResUpdateSiswaNomorHPEmail {
+  string reason = 1;
+  string status = 2;
+  ReqUpdateSiswaNomorHPEmail req = 3;
+}

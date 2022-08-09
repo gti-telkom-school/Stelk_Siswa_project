@@ -48,6 +48,11 @@ dependencies:
   url_launcher: ^6.0.18
   protobuf: ^2.0.1
   grpc: ^3.0.2
+  provider: ^6.0.2
+  recase: ^4.0.0
+  string_extensions: ^0.4.1
+  google_sign_in: ^5.2.4
+  googleapis: ^8.1.0
 
 dev_dependencies:
   flutter_test:

@@ -8,21 +8,12 @@ class KebijakanPrivasi extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey[300],
-        title: Row(
-          children: [
-            // const Icon(
-            //   Icons.arrow_back,
-            //   color: Colors.black,
-            // ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 40),
-              child: const Text(
-                'Kebijakan Privasi',
-                style:
-                    TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-              ),
-            ),
-          ],
+        title: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 40),
+          child: const Text(
+            'Kebijakan Privasi',
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          ),
         ),
         centerTitle: true,
       ),

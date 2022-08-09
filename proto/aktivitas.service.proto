@@ -1,0 +1,136 @@
+syntax = "proto3";
+
+package aktivitas;
+
+option go_package="github.com/stelk-telkom/aktivitas-service/server/proto";
+
+import "google/protobuf/timestamp.proto";
+
+message Aktivitas {
+    string id = 1;
+    string judul = 2;
+    string keterangan = 3;
+    string image = 4;
+    google.protobuf.Timestamp createdAt = 5;
+    google.protobuf.Timestamp updatedAt = 6;
+}
+
+message Comment {
+    string id = 1;
+    string idAktivitas = 2;
+    string userName = 3;
+    string userImage = 4;
+    string isi = 5;
+    google.protobuf.Timestamp createdAt = 6;
+    google.protobuf.Timestamp updatedAt = 7; 
+}
+
+service AktivitasService {
+    //Admin
+    rpc Create (ReqCreate) returns (ResCreate);
+    rpc Update (ReqUpdate) returns (ResUpdate);
+    rpc Delete (ReqDelete) returns (ResDelete);
+    rpc Search (ReqSearch) returns (ResSearch);
+
+    //All
+    rpc FindAll(ReqFindAll) returns (ResFindAll);
+
+    //Guru & Siswa
+    rpc FindComment(ReqFindComment) returns (ResFindComment);
+    rpc CountComment(ReqCountComment) returns (ResCountComment);
+    rpc CreateComment(ReqCreateComment) returns (ResCreateComment);
+}
+
+message ReqCreate {
+    string judul = 1;
+    string keterangan = 2;
+}
+
+message ResCreate {
+    string status = 1;
+    string reason = 2;
+    Aktivitas data = 3;
+}
+
+message ReqUpdate {
+    string idAktivitas = 1;
+    string judul = 2;
+    string keterangan = 3;
+}
+
+message ResUpdate {
+    string status = 1;
+    string reason = 2;
+    ReqUpdate data = 3;
+}
+
+message ReqDelete {
+    string idAktivitas = 1;
+}
+
+message ResDelete {
+    string status = 1;
+    string reason = 2;
+    ReqDelete data = 3;
+}
+
+message ReqSearch {
+    string query = 1;
+    int32 limit = 2;
+    string lastDocumentId = 3;
+}
+
+message ResSearch {
+    string status = 1;
+    string reason = 2;
+    repeated Aktivitas data = 3;
+    ReqSearch req = 4;
+}
+
+message ReqFindAll {
+    int32 limit = 1;
+    string lastDocumentId = 2;
+}
+
+message ResFindAll {
+    string status = 1;
+    string reason = 2;
+    repeated Aktivitas data = 3;
+    ReqFindAll req = 4;
+}
+
+message ReqFindComment {
+    string idAktivitas = 1;
+    int32 limit = 2;
+    string lastDocumentId = 3;
+}
+
+message ResFindComment {
+    string status = 1;
+    string reason = 2;
+    repeated Comment data = 3;
+    ReqFindComment req = 4;
+}
+
+message ReqCountComment {
+    string idAktivitas = 1;
+}
+
+message ResCountComment {
+    string status = 1;
+    string reason = 2;
+    int32 count = 3;
+}
+
+message ReqCreateComment {
+    string idAktivitas = 1;
+    string isi = 2;
+    string userName = 3;
+    string userImage = 4;
+}
+
+message ResCreateComment {
+    string status = 1;
+    string reason = 2;
+    Comment data = 3;
+}

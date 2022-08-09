@@ -32,7 +32,6 @@ class _PageUtamaState extends State<PageUtama> {
         selectedItemColor: Colors.white,
         currentIndex: index,
         iconSize: 30,
-        
         backgroundColor: const Color(0xff707D9E),
         onTap: (value) => setState(() {
           index = value;

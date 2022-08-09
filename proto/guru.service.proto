@@ -1,0 +1,186 @@
+syntax = "proto3";
+
+option go_package = "github.com/gti-telkom-school/guru-service/server/proto";
+
+package guru;
+
+import "google/protobuf/timestamp.proto";
+
+// Data
+message Mapel {
+  string tingkat = 1;
+  string mapel = 2;
+  string jurusan = 3;
+  string kelas = 4;
+}
+
+message Guru {
+  string id = 1;
+  string nip = 2;
+  string nama = 3;
+  string nomorHP = 4;
+  string email = 5;
+  string foto = 6;
+  string profil = 7;
+  repeated Mapel mapel = 8;
+  google.protobuf.Timestamp createdAt = 9;
+  google.protobuf.Timestamp updatedAt = 10;
+}
+
+service GuruService {
+  // Web
+  rpc FindGuru (ReqFindGuru) returns (ResFindGuru);
+  rpc CreateGuru (ReqCreateGuru) returns (ResCreateGuru);
+  rpc UpdateGuru (ReqUpdateGuru) returns (ResUpdateGuru);
+  rpc DeleteGuru (ReqDeleteGuru) returns (ResDeleteGuru);
+  rpc SearchGuru (ReqSearchGuru) returns (ResSearchGuru);
+
+  // Home
+  rpc FindGuruInMobile (ReqFindGuruInMobile) returns (ResFindGuruInMobile);
+  // Home -> Kelasku
+  rpc FindGuruKelasku (ReqFindGuruKelasku) returns (ResFindGuruKelasku);
+  // Home -> Guru
+  rpc FindGuruGuru (ReqFindGuruGuru) returns (ResFindGuruGuru);
+  // Settings
+  rpc UpdateGuruNomorHPEmail (ReqUpdateGuruNomorHPEmail) returns (ResUpdateGuruNomorHPEmail);
+
+  // Siswa
+  rpc FindGuruBySiswa (ReqFindGuruBySiswa) returns (ResFindGuruBySiswa);
+}
+
+// Web
+message ReqFindGuru {
+  int32 limit = 1;
+  int32 lastIndex = 2;
+}
+
+message ResFindGuru {
+  string reason = 1;
+  string status = 2;
+  repeated Guru data = 3;
+  ReqFindGuru req = 4;
+}
+
+message ReqCreateGuru {
+  string nip = 1;
+  string nama = 2;
+  string nomorHP = 3;
+  string email = 4;
+  string profil = 5;
+  repeated Mapel mapel = 6;
+}
+
+message ResCreateGuru {
+  string reason = 1;
+  string status = 2;
+  Guru data = 3;
+  ReqCreateGuru req = 4;
+}
+
+message ReqUpdateGuru {
+  string id = 1;
+  string nip = 2;
+  string nama = 3;
+  string nomorHP = 4;
+  string email = 5;
+  string profil = 6;
+  repeated Mapel mapel = 7;
+}
+
+message ResUpdateGuru {
+  string reason = 1;
+  string status = 2;
+  ReqUpdateGuru req = 3;
+}
+
+message ReqDeleteGuru {
+  string id = 1;
+}
+
+message ResDeleteGuru {
+  string reason = 1;
+  string status = 2;
+  ReqDeleteGuru req = 3;
+}
+
+message ReqSearchGuru {
+  string query = 1;
+  int32 limit = 2;
+  int32 lastIndex = 3;
+}
+
+message ResSearchGuru {
+  string reason = 1;
+  string status = 2;
+  repeated Guru data = 3;
+  ReqSearchGuru req = 4;
+}
+
+// Mobile
+message ReqFindGuruInMobile {
+  string id = 1;
+}
+
+message ResFindGuruInMobile {
+  string reason = 1;
+  string status = 2;
+  Guru data = 3;
+  ReqFindGuruInMobile req = 4;
+}
+
+message ReqUpdateGuruNomorHPEmail {
+  string id = 1;
+  string nomorHP = 2;
+  string email = 3;
+}
+
+message ResUpdateGuruNomorHPEmail {
+  string reason = 1;
+  string status = 2;
+  ReqUpdateGuruNomorHPEmail req = 3;
+}
+
+message ReqFindGuruKelasku {
+  string id = 1;
+  int32 limit = 2;
+  int32 lastIndex = 3;
+}
+
+message ResFindGuruKelasku {
+  string reason = 1;
+  string status = 2;
+  repeated Mapel mapel = 3;
+  ReqFindGuruKelasku req = 4;
+}
+
+message ReqFindGuruGuru {
+  string tingkat = 1;
+  string kelas = 2;
+  string jurusan = 3;
+  string query = 4;
+  int32 limit = 5;
+  int32 lastIndex = 6;
+}
+
+message ResFindGuruGuru {
+  string reason = 1;
+  string status = 2;
+  repeated Guru data = 3;
+  ReqFindGuruGuru req = 4;
+}
+
+message ReqFindGuruBySiswa {
+  string query = 1;
+  string tingkat = 2;
+  string kelas = 3;
+  string jurusan = 4;
+  int32 limit = 5;
+  int32 lastIndex = 6;
+}
+
+message ResFindGuruBySiswa {
+  string reason = 1;
+  string status = 2;
+  repeated Guru data = 3;
+  ReqFindGuruBySiswa req = 4;
+}
